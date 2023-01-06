@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resource :users do
+    collection do
+      post 'login', to: 'users#login'
+      post 'create', to: 'users#create'
+    end
+  end
+
   resources :pokemons
   resources :pokemons, param: :name do
     collection do
