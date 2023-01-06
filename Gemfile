@@ -34,6 +34,12 @@ gem "bootsnap", require: false
 
 gem 'dotenv-rails', groups: [:development, :test]
 
+gem 'graphql', '~> 2.0', '>= 2.0.16'
+gem 'graphiql-rails', '~> 1.0', '>= 1.0.4'
+
+# Need sprockets 3 for graphiql-rails, upgrading to v4 requires a manifest
+gem 'sprockets', '~> 3'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
