@@ -1,6 +1,6 @@
 class PokemonsController < ApplicationController
     def index
-        @pokemons = Pokemon.all
+        @pagy, @pokemons = paginate(Pokemon.all)
         render json: @pokemons
     end
 
@@ -16,7 +16,7 @@ class PokemonsController < ApplicationController
 
     def showByType
         @pokemon = Type.find_by(identifier: params[:type])
-        if @pokemon
+        if @pokemony
             render json: @pokemon.pokemons
         else
             render json: {error: "No pokemon found with type #{params[:type]}"}
