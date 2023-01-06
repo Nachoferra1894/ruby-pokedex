@@ -1,8 +1,5 @@
 class ApplicationController < ActionController::API
     include Pagy::Backend
-    rescue_from ActionController::ParameterMissing do |exception|
-      render json: { error: "exception.message" }, status: :unprocessable_entity
-    end
 
     def paginate(records)
         pagy(records, items: params[:page_size] || 10)
