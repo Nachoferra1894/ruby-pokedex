@@ -3,7 +3,7 @@ class UsersController < ApplicationController
         @user = User.create(user_params)
 
         if @user.valid?
-            token = encode_token({ user_id: @user.id })
+            token = encode_token(@user.id)
             render json: { user: @user, jwt: token }, status: :created
         else
             render json: { error: 'Invalid username or password' }, status: :unprocessable_entity
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username])
 
         if @user.authenticate(params[:password])
-            token = encode_token({ user_id: @user.id })
+            token = encode_token(@user.id)
             render json: { user: @user, jwt: token }, status: :ok
         else
             render json: { error: 'Invalid username or password' }, status: :unprocessable_entity

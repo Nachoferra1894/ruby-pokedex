@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+    before_action :authenticate_request
+    
     def index 
         @items = Item.all
     end

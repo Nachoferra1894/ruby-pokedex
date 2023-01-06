@@ -1,2 +1,0 @@
-class PokemonTypesController < ApplicationController
-end

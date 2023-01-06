@@ -1,4 +1,6 @@
 class PokemonsController < ApplicationController
+    before_action :authenticate_request
+    
     def index
         @pagy, @pokemons = paginate(Pokemon.all)
         render json: @pokemons
