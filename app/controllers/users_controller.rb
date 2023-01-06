@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+    rescue_from ActiveRecord::RecordInvalid do |exception|
+        render json: { error: exception.message }, status: :unprocessable_entity
+    end
+  
     def create
         @user = User.create(user_params)
 
@@ -6,7 +10,7 @@ class UsersController < ApplicationController
             token = encode_token(@user.id)
             render json: { user: @user, jwt: token }, status: :created
         else
-            render json: { error: 'Invalid username or password' }, status: :unprocessable_entity
+            render json: { errors: @user.errors }, status: :unprocessable_entity
         end
     end
 
