@@ -15,9 +15,10 @@ class PokemonsController < ApplicationController
     end
 
     def showByType
-        @pokemon = Type.find_by(identifier: params[:type])
-        if @pokemony
-            render json: @pokemon.pokemons
+        @type = Type.find_by(identifier: params[:type])
+        if @type
+            @pagy, @pokemon = paginate(@type.pokemons)
+            render json: @pokemon
         else
             render json: {error: "No pokemon found with type #{params[:type]}"}
         end
