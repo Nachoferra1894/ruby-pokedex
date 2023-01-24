@@ -19,7 +19,7 @@ class PokemonsController < ApplicationController
 
     def show_images
         @pokemon = Pokemon.find(params[:id])
-        render json: @pokemon.pokemon_images
+        render json: @pokemon.pokemon_images.map{|image| {id: image[:id],url: url_for(image)}}
     end
 
     def showByName
