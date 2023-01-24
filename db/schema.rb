@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_06_140326) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_122444) do
   create_table "abilities", force: :cascade do |t|
     t.string "identifier", limit: 79, null: false
     t.integer "generation_id", null: false
@@ -944,6 +944,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_140326) do
     t.string "identifier", limit: 79, null: false
   end
 
+  create_table "pokemon_images", force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_pokemon_images_on_pokemon_id"
+  end
+
   create_table "pokemon_items", primary_key: ["pokemon_id", "version_id", "item_id"], force: :cascade do |t|
     t.integer "pokemon_id", null: false
     t.integer "version_id", null: false
@@ -1410,6 +1418,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_140326) do
   add_foreign_key "pokemon_game_indices", "versions"
   add_foreign_key "pokemon_habitat_names", "languages", column: "local_language_id"
   add_foreign_key "pokemon_habitat_names", "pokemon_habitats"
+  add_foreign_key "pokemon_images", "pokemons"
   add_foreign_key "pokemon_items", "items"
   add_foreign_key "pokemon_items", "pokemons"
   add_foreign_key "pokemon_items", "versions"
