@@ -3,5 +3,5 @@ class Pokemon < ApplicationRecord
     has_many :types, through: :pokemon_types
     has_many :pokemon_abilities
     has_many :abilities, through: :pokemon_abilities
-    has_many :pokemon_images
+    has_many_attached :pokemon_images
 end

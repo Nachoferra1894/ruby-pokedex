@@ -11,6 +11,17 @@ class PokemonsController < ApplicationController
         render json: @pokemon
     end
 
+    def add_images
+        @pokemon = Pokemon.find(params[:id])
+        @pokemon.pokemon_images.attach(params[:pokemon_images])
+        render json: @pokemon.pokemon_images
+    end
+
+    def show_images
+        @pokemon = Pokemon.find(params[:id])
+        render json: @pokemon.pokemon_images
+    end
+
     def showByName
         @pokemon = Pokemon.find_by(identifier: params[:name])
         render json: @pokemon
@@ -25,4 +36,9 @@ class PokemonsController < ApplicationController
             render json: {error: "No pokemon found with type #{params[:type]}"}
         end
     end
+
+    private 
+        def pokemon_params
+            params.require(:pokemon).permit(:identifier, :height, :weight, :base_experience, :is_default, pokemon_images: [])
+        end
 end

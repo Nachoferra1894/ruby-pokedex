@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   resources :pokemons, param: :name do
     collection do
       get 'name/:name', to: 'pokemons#showByName'
+      post ':id/images', to: 'pokemons#add_images'
+      get ':id/images', to: 'pokemons#show_images'
     end
   end
   resources :pokemons, param: :type do
